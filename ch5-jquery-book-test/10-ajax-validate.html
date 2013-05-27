@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<title>Use serialize() for side field validation</title>
+	<style>
+  /* please externalize this code to an external
+      .css file */
+	  .error {
+	    border-color: red;
+	  }
+	</style>
+</head>
+<body>
+
+<h2>Fill out the fields and see the result.</h2>
+
+<form action="" method="post">
+	<label for="first_field">First field</label>
+	<input type="text" name="first_field" 
+	  value="" id="first_field"><br>
+	  
+	<label for="second_field">Second field</label>
+	<input type="text" name="second_field" 
+	  value="" id="second_field"><br>
+	  
+	<label for="third_field">Third field</label>
+	<input type="text" name="third_field" 
+	  value="" id="third_field"><br>
+	  
+	<label for="fourth_field">Fourth field</label>
+	<input type="text" name="fourth_field" 
+	  value="" id="fourth_field"><br>
+	  
+  <input type="submit" name="submit" value="Submit" id="submit">
+	
+</form>
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.jss"></script>
+
+<script>
+// please externalize this code to an external .js file
+$(document).ready(function() {
+	
+  $('input').filter(':text').addClass('error');
+
+  $('input').change(function() {
+
+  	$.get('validate', $('form').serialize())
+  	.done(function(data) {
+  	  
+  		$('input').removeClass('error');
+		
+  		$.each(data, function(i, name) {
+  			$('#' + name).addClass('error');
+  		});
+  		
+  	});
+  	
+  });
+
+});
+</script>
+</body>
+</html>

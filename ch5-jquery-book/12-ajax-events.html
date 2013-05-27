@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>AJAX related event handlers</title>
+</head>
+<body>
+
+<h2>Press the button to perform the request.</h2>
+
+<button id="trigger">GET</button>
+<br>
+<div id="target"> </div>
+<div id="log"> </div>
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script>
+// please externalize this code to an external .js file
+$(document).ready(function() {
+
+  $('#trigger').click(function() {
+    $('#target').load('test-snippet.html'); 
+  });
+
+  $.each(('ajaxError ajaxSend ajaxStart ajaxStop ' +
+          'ajaxSuccess ajaxComplete').split(' '),
+    function( i, name ) {
+      $('#log').bind(name, function(event, xhr) {
+      $(this).append('Event: ' + event.type + '<br/>');
+    });
+  });
+});
+</script>
+</body>
+</html>

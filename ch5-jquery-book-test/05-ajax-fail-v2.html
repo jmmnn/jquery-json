@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>Test case: failure</title>
+</head>
+<body>
+
+<h2>Press the button to perform the request.</h2>
+
+<button id="trigger">GET</button>
+<br>
+<div id="target"> 
+
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script>
+// please externalize this code to an external .js file
+$(document).ready(function() {
+
+  $('#trigger').click(function() {
+
+    $.ajax('fail-on-purpose', {
+				statusCode: {
+						404: function() {alert('4oh4d');},
+						500: function() {alert('500reded');}
+				}
+		})
+    .done(function(data, xhr) {
+      $('#target').append('Unexpected success... ' +
+                     '(actually not a good thing)');
+     })
+    .fail(function(xhr, text, error) {
+			console.log(xhr.status == 500);
+			if (xhr.status == 500) {$("#target").append('The server seems to be having trouble<br />')};
+			if (xhr.status == 404) {$("#target").append('I cannot seem to locate the resource you want<br />')};
+      $('#target').append('Failed as expected (good!). Code ' + 
+                            xhr.status + ' and text ' + error);
+														
+    });
+
+  });
+
+});
+</script>
+</body>
+</html>

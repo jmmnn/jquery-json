@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>The AJAX load() request</title>
+</head>
+<body>
+
+<h2>Press the button to perform the request.</h2>
+
+<button id="trigger">GET</button>
+<br>
+<div id="target"> 
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script>
+// please externalize this code to an external .js file
+$(document).ready(function() {
+
+  $('#trigger').click(function() {
+
+    $('#target').load('03a-test-snippet.html'); 
+ 
+  });
+
+});
+</script>
+</body>
+</html>

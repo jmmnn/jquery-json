@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>The timeout property</title>
+</head>
+<body>
+
+<h2>Press the button to perform the request.</h2>
+
+<button id="trigger">GET</button>
+<br>
+<div id="target"> 
+
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script>
+// please externalize this code to an external .js file
+$(document).ready(function() {
+
+  $('#trigger').click(function() {
+
+    $.ajax({url: 'sleep', 
+        timeout : 1000
+    })
+    .done(function(data, xhr) {
+      $('#target').append('Response in time after all: ' + data);
+    })
+    .fail(function(xhr, text, error) {
+      $('#target').append('Failed as expected: ' + error);
+    });
+    
+  });
+
+});
+</script>
+</body>
+</html>

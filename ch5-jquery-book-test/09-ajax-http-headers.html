@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>The headers property</title>
+</head>
+<body>
+
+<h2>Press the button to perform the request.</h2>
+
+<button id="trigger">GET</button>
+<br>
+<div id="target"> 
+
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script>
+// please externalize this code to an external .js file
+$(document).ready(function() {
+
+  $('#trigger').click(function() {
+
+    $.ajax({url: 'return-http-headers', 
+        headers : {
+            ETag: '12345'
+      }
+    })
+    .done(function(data, xhr) {
+      $('#target').append(
+        $.map(data.headers, function(i, name) {
+            return name + ' = '+ data.headers[name] + '<br/>';
+          })
+         .join(' ')
+      );
+    })
+    .fail(function(xhr, text, error) {
+      $('#target').append('Failed unexpectedly');
+    });
+  });
+
+});
+</script>
+</body>
+</html>
